@@ -1,7 +1,7 @@
-in the first stem i have created the testRepo2 folder
+in the first step i have created the testRepo2 folder
 than testRepo2File in this folder
 and than tried to push it to the repo on the github https://github.com/m-zbik/testRepo.git
-text in the folder was as following:
+text in the file testRepo2File was as following:
 -------------------
 test repo file nr2.
 Directory on my comp: c:/Users/Dell/testRepo2/.git/
@@ -17,3 +17,5 @@ So now I've put the file in the previously created folder: testRepo
 and now trying to pus it to the github https://github.com/m-zbik/testRepo.git
 
 let's see...
+
+It is where it should be. I am typing from the gitHub
