@@ -1,0 +1,19 @@
+in the first stem i have created the testRepo2 folder
+than testRepo2File in this folder
+and than tried to push it to the repo on the github https://github.com/m-zbik/testRepo.git
+text in the folder was as following:
+-------------------
+test repo file nr2.
+Directory on my comp: c:/Users/Dell/testRepo2/.git/
+
+direcotry on my gitHub: https://github.com/m-zbik/testRepo.git
+-------------------
+
+when I have typed the push command I've got the info
+error: src refspec master does not mathc any.
+error: faile to push some refs to https://github.com/m-zbik/testRepo.git/ 
+
+So now I've put the file in the previously created folder: testRepo 
+and now trying to pus it to the github https://github.com/m-zbik/testRepo.git
+
+let's see...
