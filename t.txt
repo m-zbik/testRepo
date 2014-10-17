@@ -1,11 +1,12 @@
 1 - master
+<<<<<<< HEAD /**adde by the git => merge conlifct.**/
 /***from heare to:
-
-
-
-
-
-
+git branch slave
+checkout
+add
+commit
+push to slave
+2 - change on the slave branch (should not be visible on the master)
 ****heare there is a material from slave branch**/
 3. Now branches are split
 add
@@ -21,3 +22,11 @@ commit
 push to master
 
 We should see all file with changes in the firs point.
+======= /**adde by the git => merge conlflict. I coppied next 6 lines above but I leave this as an example**/
+git branch slave
+checkout
+add
+commit
+push to slave
+2 - change on the slave branch (should not be visible on the master)
+>>>>>>> slave
