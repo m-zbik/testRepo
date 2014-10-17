@@ -100,7 +100,9 @@ git branch <new_branch>
 git checkout <new_branch>
 
 git checkout master	/**getting back to master branch to make some merges we can type <master branch>
-git merge clean_up	/** merge your changes from the clean_up branch into the master branch
+git merge clean_up	/** merge your changes from the clean_up branch into the master branch; remamber that
+				is should be typed when you are 'loged in' on the master branch
+git branch -d <name of the branch ex: clean_up>	/**afer the work has been done you can delete usles branch
 
 rm -f	/**remove the file with --force ignore nonexistent files, never prompt
 
