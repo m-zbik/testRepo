@@ -1,1 +1,15 @@
 1 - master
+/***from heare to:
+
+
+
+
+
+
+****heare there is a material from slave branch**/
+3. Now branches are split
+add
+commit
+push to master
+above will not be seen on the slave branch.
+Later we will merge it.
