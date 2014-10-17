@@ -13,3 +13,11 @@ commit
 push to master
 above will not be seen on the slave branch.
 Later we will merge it.
+
+4. Now lets merge it (we are on the master branch)
+git merge slave
+add
+commit
+push to master
+
+We should see all file with changes in the firs point.
