@@ -1,0 +1,273 @@
+*****FIRST PARAGPRH*****
+pwd	/**checkin your current directory for example it will show /c/Users/name
+cd <directory ex:c/.../..>	/**cd 'change directory'
+cd ..	/**go back on step in the directory tree
+cd /	/**goes to the root directory
+ls	/**Lists the contents of a directory.
+
+git config --global user.name"m-zbik"
+git config --global user.email"michal.zbikowski@gmail.com"
+
+git init <project name>  /**the folder is being creater with this name>
+git clone <directory> /**from github
+git status /** check if there is sth to commiet if there were any changes in the work
+git add <file name> /**add a file (hey Git start tracking it) that was created or modified and 
+			you want to save the changes and put it to the 'stage' so it could be 
+			than 'commit'-ed
+			After modifications the file is not being tracked by Git
+			Files are in the stage area NOT in the Repo
+git commit -m"some description here" /**save changes by 'commit'-ing the 'add'-ed file
+					that is in the 'stage' after modifications introduced
+					to it.
+					Files are in the Repo (changes are saved forever)
+
+git add -A . /**You can also type where the dot stands for the current directory, so everything in 
+		and beneath it is added. 
+		The -A ensures even file deletions are included.
+
+git reset <filename> /** You can use to remove a file or files from the staging area.
+git rm --cached <file> /** to unstage
+
+
+
+/**Staging Area: A place where we can group files together before we "commit" them to Git.
+/**Commit A "commit" is a snapshot of our repository. This way if we ever need to look back
+	at the changes we've made (or if someone else does), we will see a nice timeline 
+	of all changes.
+
+git log --summary /**to see more information for each commit. You can see where new files 
+			were added for the first time or where files were deleted. 
+			It's a good overview of what's going on in the project.
+
+*****
+
+*****Second paragraph*****
+/**To push our local repo to the GitHub server we'll need to add a remote repository.
+	It's also a good idea for your main repository to be on a remote server like GitHub in case 
+	your machine is lost
+
+git remote add origin https://github.com/.../... .git	/**This command takes a remote name and a repository URL
+								origin is the name of the main remote
+git remote -v	/**Checking what remote are defined and the -v gets us also the URL
+git remote remove <name>	/**removing old one, we can also rename it by git remote rename <old name> <new name>
+git push -u origin master /**The name of our remote is origin and the default local branch name is master
+				The -u tells Git to remember the parameters, so that next time we can 
+				simply run git push and Git will know what to do
+					
+git pull origin master /**We can check for changes on our GitHub repository and pull down any new changes
+				 Automatically fetch and then merge a remote branch into your current branch.
+git fatch <remote name> /**  fetch all the information that someone you work with has but that you don’t 
+				yet have in your repository, you can run git fetch pb.
+				The command goes out to that remote project and pulls down all the data 
+				from that remote project that you don’t have yet. After you do this, 
+				you should have references to all the branches from that remote, which 
+				you can merge in or inspect at any time.
+git fetch origin 	/** fetche any new work that has been pushed to that server since you cloned 
+				(or last fetched from) it. It’s important to note that the fetch command 
+				pulls the data to your local repository — it doesn’t automatically merge 
+				it with any of your work or modify what you’re currently working on. 
+				You have to merge it manually into your work when you’re ready.
+
+git stash /** store (something) safely and secretly in a specified place. Often, when you’ve been working 
+		on part of your project, things are in a messy state and you want to switch branches for 
+		a bit to work on something else. The problem is, you don’t want to do a commit of 
+		half-done work just so you can get back to this point later. The answer to this issue 
+		is the git stash command.
+git stash apply /**re-apply your changes after your pull.
+git reset HEAD <file>	/**use it to unstage - check also PROBLEMS description below. After unstageing the
+				file use git add <filename> to save changes and than commit
+git stash list	/**to see a list of stashed files
+git stash apply stash@{no. from the stash list}	/** accessing stahed file if there is more than one stahsed
+							file. It will be shown on the stash list
+git stash drop stash@{no. from the stash list}	/** remove the stahsed file 
+git stash pop	/**opens stahed file and remove it immediately
+*****
+
+*****Branching*****
+/**When developers are working on a feature or bug they'll often create a copy (aka. branch) of their code 
+	they can make separate commits to. Then when they're done they can merge this branch back into their main 
+	master branch.
+	Branches are what naturally happens when you want to work on multiple features at the same time. 
+	You wouldn't want to end up with a master branch which has Feature A half done and Feature B half done.
+git branch clean_up /** create new branch
+git checkout clean_up /** switch from to master (the main branch) to new created branch
+			Rather you'd separate the code base into two "snapshots" (branches) and work on and 
+			commit to them separately. As soon as one was ready, you might merge this branch 
+			back into the master branch and push it to the remote server.
+git checkout -b new_branch	/** this is the same (in one line) as two lines of commend:
+
+git branch <new_branch>
+git checkout <new_branch>
+
+git checkout master	/**getting back to master branch to make some merges we can type <master branch>
+git merge clean_up	/** merge your changes from the clean_up branch into the master branch
+
+rm -f	/**remove the file with --force ignore nonexistent files, never prompt
+
+
+
+Based on:
+1. http://git-scm.com/
+2. https://try.github.io/
+3. http://stackoverflow.com
+
+
+PROBLEMS:
+*****
+Git - fatal: Unable to create '/path/my_project/.git/index.lock': File exists.
+rm -f ./.git/index.lock
+
+or 
+
+cd .git
+rm -f index.lock
+*****
+Git Pull is Not Possible, Unmerged Files
+Nearly every combination, stashing changes and pulling from repository, results in 
+unmergable files. I'd like to discard all local changes and just use the remote, but I 
+cannot clone again (bandwidth and internet usage limitations with the developer trying to do this). 
+How do I do this?
+
+Just tried:
+
+git stash
+git pull
+--
+1) 
+git reset <file name>
+git add <file name>
+
+2)
+Say the remote is origin and the branch is master, and say you already have master checked out, 
+might try the following:
+
+git fetch origin
+git reset --hard origin/master
+
+This basically just takes the current branch and points it to the HEAD of the remote branch.
+
+WARNING: As stated in the comments, this will throw away your local changes and overwrite with w
+hatever is on the origin.
+
+Or you can use the plumbing commands to do essentially the same:
+
+git fetch <remote>
+git update-ref refs/heads/<branch> $(git rev-parse <remote>/<branch>)
+git reset --hard
+
+EDIT: I'd like to briefly explain why this works.
+
+The .git folder can hold the commits for any number of repositories. Since the commit hash 
+is actually a verification method for the contents of the commit, and not just a randomly 
+generated value, it is used to match commit sets between repositories.
+
+A branch is just a named pointer to a given hash. Here's an example set:
+
+$ find .git/refs -type f
+.git/refs/tags/v3.8
+.git/refs/heads/master
+.git/refs/remotes/origin/HEAD
+.git/refs/remotes/origin/master
+
+Each of these files contains a hash pointing to a commit:
+
+$ cat .git/refs/remotes/origin/master
+d895cb1af15c04c522a25c79cc429076987c089b
+
+These are all for the internal git storage mechanism, and work independently of the 
+working directory. By doing the following:
+
+git reset --hard origin/master
+
+git will point the current branch at the same hash value that origin/master points to. 
+Then it forcefully changes the working directory to match the file structure/contents at that hash.
+
+To see this at work go ahead and try out the following:
+
+git checkout -b test-branch
+# see current commit and diff by the following
+git show HEAD
+# now point to another location
+git reset --hard <remote>/<branch>
+# see the changes again
+git show HEAD
+
+*****
+You have not concluded your merge (MERGE_HEAD exists).
+Please, commit your changes before you can merge.
+--
+OK. The problem is your previous pull failed to merge automatically and went to conflict 
+state. And the conflict wasn't resolved properly before the next pull.
+
+1) Undo the merge and pull again.
+
+To undo a merge:
+
+git merge --abort [Since git version 1.7.4]
+
+git reset --merge [prior git versions]
+
+2) Resolve the conflict.
+
+3) Don't forget to add and commit the merge.
+
+4) git pull now should work fine
+
+*****
+Basic Merge Conflicts
+--
+Occasionally, this process doesn’t go smoothly. If you changed the same part of the same file 
+differently in the two branches you’re merging together, Git won’t be able to merge them cleanly. 
+If your fix for issue #53 modified the same part of a file as the hotfix, you’ll get a merge 
+conflict that looks something like this:
+
+$ git merge iss53
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+
+Git hasn’t automatically created a new merge commit. It has paused the process while you 
+resolve the conflict. If you want to see which files are unmerged at any point after a merge 
+conflict, you can run git status:
+
+$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+        both modified:      index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Anything that has merge conflicts and hasn’t been resolved is listed as unmerged. 
+Git adds standard conflict-resolution markers to the files that have conflicts, so you can 
+open them manually and resolve those conflicts. Your file contains a section that looks 
+something like this:
+
+<<<<<<< HEAD
+<div id="footer">contact : email.support@github.com</div>
+=======
+<div id="footer">
+  please contact us at support@github.com
+</div>
+>>>>>>> iss53
+
+This means the version in HEAD (your master branch, because that was what you had checked 
+out when you ran your merge command) is the top part of that block 
+(everything above the =======), while the version in your iss53 branch looks like everything 
+in the bottom part. In order to resolve the conflict, you have to either choose one side or 
+the other or merge the contents yourself. For instance, you might resolve this conflict by 
+replacing the entire block with this:
+
+<div id="footer">
+please contact us at email.support@github.com
+</div>
+
+This resolution has a little of each section, and I’ve fully removed 
+the <<<<<<<, =======, and >>>>>>> lines. After you’ve resolved each of these sections 
+in each conflicted file, run git add on each file to mark it as resolved. Staging the file marks it 
+as resolved in Git.
+
